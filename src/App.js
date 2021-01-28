@@ -3,31 +3,45 @@ import './App.css'
 import placeholderImg from './placeholder.png'
 import { ReactComponent as ChevronLeft } from './chevron-left.svg'
 import { ReactComponent as ChevronRight } from './chevron-right.svg'
+import _ from 'lodash';
 
 function App() {
   const [searchResult, setSearchResult] = useState()
+  const [searchTerm, setSearchTerm] = useState("");
 
+
+  const handleChange = event => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleClick = () => {
+
+  }
+  
   useEffect(() => {
     const search = async () => {
       const response = await fetch(
-        'http://www.omdbapi.com/?apikey=a461e386&s=king',
+        `http://www.omdbapi.com/?apikey=a461e386&s=${searchTerm}&page=1`
+        // `http://www.omdbapi.com/?apikey=a461e386&s=pepe`
       )
-
       const data = await response.json()
-
-      if (!searchResult) {
-        setSearchResult(data)
-      }
+      console.log(data)
+      console.log( `http://www.omdbapi.com/?apikey=a461e386&s=${searchTerm}&page=1`)
+      setSearchResult(data)
     }
-
     search()
-  })
+  },[searchTerm])
 
   return (
     <div className="App">
       <div className="search">
-        <input type="text" placeholder="Search..." />
-        <button>Search</button>
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          onChange={handleChange}
+          value={searchTerm}
+        />
+        <button onClick={ handleClick }>Search</button>
       </div>
       {!searchResult ? (
         <p>No results yet</p>
@@ -37,7 +51,8 @@ function App() {
             <ChevronLeft />
           </div>
           <div className="search-results-list">
-            {searchResult.Search.map(result => (
+            {_.isUndefined(searchResult.Search) ? console.log('undefined') :
+            searchResult.Search.map(result => (
               <div key={result.imdbID} className="search-item">
                 <img
                   src={result.Poster === 'N/A' ? placeholderImg : result.Poster}
