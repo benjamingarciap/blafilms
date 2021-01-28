@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash';
 import styled from 'styled-components'
 
 const SearchBarWrapper = styled.div`
@@ -37,6 +36,7 @@ function SearchBar(props) {
     setSearchTerm,
     searchTerm
   } = props;
+
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };

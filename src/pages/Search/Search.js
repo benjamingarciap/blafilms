@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import _ from 'lodash';
 import SearchBar from './../../components/Search/SearchBar'
 import SearchResults from './../../components/Search/SearchResults'
 
@@ -22,7 +21,7 @@ function Search() {
         const movies = res;
         setSearchResult(movies.data)
         setLoading(false)
-        !movies.data.Error ? setIsLastPage(false)  : setIsLastPage(true)
+        !movies.data.Error ? setIsLastPage(false) : setIsLastPage(true)
       })
       .catch(error => console.log(`error ${error}`))
     };

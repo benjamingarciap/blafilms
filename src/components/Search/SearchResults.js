@@ -110,8 +110,8 @@ function SearchResults(props) {
       </PaginationButton>
       { !_.isUndefined(searchResult.Search) ?
         <SearchResultsList>
-          { searchResult.Search.map(result => (
-            <SearchItem key={result.imdbID}>
+          { searchResult.Search.map((result, idx) => (
+            <SearchItem key={idx}>
               <Image
                 src={result.Poster === 'N/A' ? placeholderImg : result.Poster}
                 alt="poster"
