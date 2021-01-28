@@ -125,7 +125,7 @@ function SearchResults(props) {
         </SearchResultsList> :
         <Loader>
           {
-            searching === '' ? null :
+            searching === '' ? <p>Search by typing a word</p> :
             loading ? <p>No results yet</p> : <p>Movie Not Found</p>
           }
         </Loader>

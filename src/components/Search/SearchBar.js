@@ -50,6 +50,7 @@ function SearchBar(props) {
   const handleClickSearch = () => {
     setSearching(searchTerm);
     setPage(1);
+    setSearchTerm('')
   };
 
   return(
